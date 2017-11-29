@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dongnao.workbench.basic.dao.SurveyMapper">
+	<resultMap id="BaseResultMap" type="com.dongnao.workbench.common.bean.Survey">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="ip" property="ip" jdbcType="VARCHAR" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		 	id
+			,ip
+			,content
+			,create_date
+		</sql>
+	
+	<select id="getByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+			id
+			,ip
+			,content
+			,create_date
+		from survey 
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	
+	<select id="listByCondition" resultMap="BaseResultMap" parameterType="com.dongnao.workbench.common.bean.Survey">
+		select
+			 id
+			,ip
+			,content
+			,create_date
+		from survey 
+		where 1=1
+		<if test="ip != null and '' != ip">  
+			and ip = #{ip,jdbcType=VARCHAR}
+		</if>
+	</select>
+	
+	
+	<insert id="add" parameterType="com.dongnao.workbench.common.bean.Survey">
+		insert into survey (
+			ip
+			,content
+			,create_date
+		)values (
+				#{ip,jdbcType=VARCHAR}
+				,#{content,jdbcType=VARCHAR}
+				,NOW()
+			)
+	</insert>
+</mapper>

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dongnao.workbench.account.dao.AccountingMapper">
+	<resultMap id="BaseResultMap" type="com.dongnao.workbench.account.model.Accounting">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+															<result column="document_type" property="documentType" jdbcType="VARCHAR" />
+													<result column="document_no" property="documentNo" jdbcType="INTEGER" />
+													<result column="account_period" property="accountPeriod" jdbcType="TIMESTAMP" />
+													<result column="bill_date" property="billDate" jdbcType="TIMESTAMP" />
+													<result column="enter_pno" property="enterPno" jdbcType="VARCHAR" />
+													<result column="check_pno" property="checkPno" jdbcType="VARCHAR" />
+													<result column="book_pno" property="bookPno" jdbcType="VARCHAR" />
+													<result column="doc_attach" property="docAttach" jdbcType="SMALLINT" />
+													<result column="valid_flag" property="validFlag" jdbcType="INTEGER" />
+													<result column="book_flag" property="bookFlag" jdbcType="INTEGER" />
+													<result column="check_flag" property="checkFlag" jdbcType="INTEGER" />
+													<result column="digest" property="digest" jdbcType="VARCHAR" />
+													<result column="exch_name" property="exchName" jdbcType="VARCHAR" />
+													<result column="md_name" property="mdName" jdbcType="VARCHAR" />
+													<result column="md_money" property="mdMoney" jdbcType="VARCHAR" />
+													<result column="md_num" property="mdNum" jdbcType="FLOAT" />
+													<result column="mc_name" property="mcName" jdbcType="VARCHAR" />
+													<result column="mc_money" property="mcMoney" jdbcType="VARCHAR" />
+													<result column="mc_num" property="mcNum" jdbcType="FLOAT" />
+													<result column="settle_type" property="settleType" jdbcType="VARCHAR" />
+													<result column="cheque_no" property="chequeNo" jdbcType="VARCHAR" />
+													<result column="cheque_date" property="chequeDate" jdbcType="TIMESTAMP" />
+													<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+													<result column="money" property="money" jdbcType="VARCHAR" />
+													<result column="dept_no" property="deptNo" jdbcType="VARCHAR" />
+													<result column="emp_no" property="empNo" jdbcType="VARCHAR" />
+													<result column="custo_no" property="custoNo" jdbcType="VARCHAR" />
+													<result column="apply_no" property="applyNo" jdbcType="VARCHAR" />
+													<result column="salesman_no" property="salesmanNo" jdbcType="VARCHAR" />
+													<result column="note" property="note" jdbcType="VARCHAR" />
+									</resultMap>
+	<sql id="Base_Column_List">
+						 	id
+										,document_type
+										,document_no
+										,account_period
+										,bill_date
+										,enter_pno
+										,check_pno
+										,book_pno
+										,doc_attach
+										,valid_flag
+										,book_flag
+										,check_flag
+										,digest
+										,exch_name
+										,md_name
+										,md_money
+										,md_num
+										,mc_name
+										,mc_money
+										,mc_num
+										,settle_type
+										,cheque_no
+										,cheque_date
+										,create_date
+										,money
+										,dept_no
+										,emp_no
+										,custo_no
+										,apply_no
+										,salesman_no
+										,note
+						</sql>
+	
+	<select id="getByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select *
+		from accounting 
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="listByCondition" resultMap="BaseResultMap" parameterType="com.dongnao.workbench.account.model.Accounting">
+		select a.*,b.full_name as enterPname
+		from accounting a
+		left join basic_user_info b
+		on a.enter_pno = b.id
+		where 1=1
+		<if test="id != null and '' != id">  
+			and a.id = #{id,jdbcType=VARCHAR}
+		</if>
+		<if test="documentType != null and '' != documentType">  
+			and a.document_type = #{documentType,jdbcType=VARCHAR}
+		</if>
+		<if test="documentNo != null and '' != documentNo">  
+			and a.document_no = #{documentNo,jdbcType=INTEGER}
+		</if>
+		<if test="accountPeriod != null and '' != accountPeriod">  
+			and a.account_period = #{accountPeriod,jdbcType=TIMESTAMP}
+		</if>
+		<if test="billDate != null and '' != billDate">  
+			and a.bill_date = #{billDate,jdbcType=TIMESTAMP}
+		</if>
+		<if test="enterPno != null and '' != enterPno">  
+			and a.enter_pno = #{enterPno,jdbcType=VARCHAR}
+		</if>
+		<if test="checkPno != null and '' != checkPno">  
+			and a.check_pno like CONCAT('%',#{checkPno,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="checkFlag != null and '' != checkFlag">  
+			and a.check_flag = #{checkFlag,jdbcType=VARCHAR}
+		</if>
+		<if test="bookPno != null and '' != bookPno">  
+			and a.book_pno = #{bookPno,jdbcType=VARCHAR}
+		</if>
+		<if test="docAttach != null and '' != docAttach">  
+			and a.doc_attach = #{docAttach,jdbcType=SMALLINT}
+		</if>
+		<if test="validFlag != null and '' != validFlag">  
+			and a.valid_flag = #{validFlag,jdbcType=INTEGER}
+		</if>
+		<if test="bookFlag != null and '' != bookFlag">  
+			and a.book_flag = #{bookFlag,jdbcType=INTEGER}
+		</if>
+		<if test="digest != null and '' != digest">  
+			and a.digest = #{digest,jdbcType=VARCHAR}
+		</if>
+		<if test="exchName != null and '' != exchName">  
+			and a.exch_name = #{exchName,jdbcType=VARCHAR}
+		</if>
+		<if test="mdName != null and '' != mdName">  
+			and a.md_name = #{mdName,jdbcType=VARCHAR}
+		</if>
+		<if test="mdMoney != null and '' != mdMoney">  
+			and a.md_money = #{mdMoney,jdbcType=VARCHAR}
+		</if>
+		<if test="mdNum != null and '' != mdNum">  
+			and a.md_num = #{mdNum,jdbcType=FLOAT}
+		</if>
+		<if test="mcName != null and '' != mcName">  
+			and a.mc_name = #{mcName,jdbcType=VARCHAR}
+		</if>
+		<if test="mcMoney != null and '' != mcMoney">  
+			and a.mc_money = #{mcMoney,jdbcType=VARCHAR}
+		</if>
+		<if test="mcNum != null and '' != mcNum">  
+			and a.mc_num = #{mcNum,jdbcType=FLOAT}
+		</if>
+		<if test="settleType != null and '' != settleType">  
+			and a.settle_type = #{settleType,jdbcType=VARCHAR}
+		</if>
+		<if test="chequeNo != null and '' != chequeNo">  
+			and a.cheque_no = #{chequeNo,jdbcType=VARCHAR}
+		</if>
+		<if test="chequeDate != null and '' != chequeDate">  
+			and a.cheque_date = #{chequeDate,jdbcType=TIMESTAMP}
+		</if>
+		<if test="createDate != null and '' != createDate">  
+			and a.create_date = #{createDate,jdbcType=TIMESTAMP}
+		</if>
+		<if test="money != null and '' != money">  
+			and a.money = #{money,jdbcType=VARCHAR}
+		</if>
+		<if test="deptNo != null and '' != deptNo">  
+			and a.dept_no = #{deptNo,jdbcType=VARCHAR}
+		</if>
+		<if test="empNo != null and '' != empNo">  
+			and a.emp_no = #{empNo,jdbcType=VARCHAR}
+		</if>
+		<if test="custoNo != null and '' != custoNo">  
+			and a.custo_no = #{custoNo,jdbcType=VARCHAR}
+		</if>
+		<if test="applyNo != null and '' != applyNo">  
+			and a.apply_no = #{applyNo,jdbcType=VARCHAR}
+		</if>
+		<if test="salesmanNo != null and '' != salesmanNo">  
+			and a.salesman_no = #{salesmanNo,jdbcType=VARCHAR}
+		</if>
+		<if test="note != null and '' != note">  
+			and a.note = #{note,jdbcType=VARCHAR}
+		</if>
+		<if test="null != propsMap.startDate and propsMap.startDate != ''">
+			<![CDATA[
+			and DATE_FORMAT(a.bill_date,'%Y-%m-%d') >= DATE_FORMAT(#{propsMap.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+			]]>
+		</if>
+		<if test="null != propsMap.endDate and propsMap.endDate != ''">
+			<![CDATA[
+				and DATE_FORMAT(a.bill_date,'%Y-%m-%d') <= DATE_FORMAT(#{propsMap.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+			]]>
+		</if>
+				<if test="orderFields != null and '' != orderFields">  
+           	order by ${orderFields} ${order}
+         	</if>
+	</select>
+	
+	<delete id="deleteByKey" parameterType="java.lang.String">
+		delete from accounting
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	
+	<insert id="add" parameterType="com.dongnao.workbench.account.model.Accounting">
+		insert into accounting (
+		<include refid="Base_Column_List" />
+		)values (
+										#{id,jdbcType=VARCHAR}
+														,#{documentType,jdbcType=VARCHAR}
+														,#{documentNo,jdbcType=INTEGER}
+														,#{accountPeriod,jdbcType=TIMESTAMP}
+														,#{billDate,jdbcType=TIMESTAMP}
+														,#{enterPno,jdbcType=VARCHAR}
+														,#{checkPno,jdbcType=VARCHAR}
+														,#{bookPno,jdbcType=VARCHAR}
+														,#{docAttach,jdbcType=SMALLINT}
+														,#{validFlag,jdbcType=INTEGER}
+														,#{bookFlag,jdbcType=INTEGER}
+														,#{checkFlag,jdbcType=INTEGER}
+														,#{digest,jdbcType=VARCHAR}
+														,#{exchName,jdbcType=VARCHAR}
+														,#{mdName,jdbcType=VARCHAR}
+														,#{mdMoney,jdbcType=VARCHAR}
+														,#{mdNum,jdbcType=FLOAT}
+														,#{mcName,jdbcType=VARCHAR}
+														,#{mcMoney,jdbcType=VARCHAR}
+														,#{mcNum,jdbcType=FLOAT}
+														,#{settleType,jdbcType=VARCHAR}
+														,#{chequeNo,jdbcType=VARCHAR}
+														,#{chequeDate,jdbcType=TIMESTAMP}
+														,#{createDate,jdbcType=TIMESTAMP}
+														,#{money,jdbcType=VARCHAR}
+														,#{deptNo,jdbcType=VARCHAR}
+														,#{empNo,jdbcType=VARCHAR}
+														,#{custoNo,jdbcType=VARCHAR}
+														,#{applyNo,jdbcType=VARCHAR}
+														,#{salesmanNo,jdbcType=VARCHAR}
+														,#{note,jdbcType=VARCHAR}
+									)
+	</insert>
+	
+	<update id="update" parameterType="com.dongnao.workbench.account.model.Accounting">
+		update accounting  set
+		ID= #{id,jdbcType=VARCHAR}
+											,document_type = #{documentType,jdbcType=VARCHAR}
+											,document_no = #{documentNo,jdbcType=INTEGER}
+											,account_period = #{accountPeriod,jdbcType=TIMESTAMP}
+											,bill_date = #{billDate,jdbcType=TIMESTAMP}
+											,enter_pno = #{enterPno,jdbcType=VARCHAR}
+											,check_pno = #{checkPno,jdbcType=VARCHAR}
+											,book_pno = #{bookPno,jdbcType=VARCHAR}
+											,doc_attach = #{docAttach,jdbcType=SMALLINT}
+											,valid_flag = #{validFlag,jdbcType=INTEGER}
+											,book_flag = #{bookFlag,jdbcType=INTEGER}
+											,check_flag =#{checkFlag,jdbcType=INTEGER}
+											,digest = #{digest,jdbcType=VARCHAR}
+											,exch_name = #{exchName,jdbcType=VARCHAR}
+											,md_name = #{mdName,jdbcType=VARCHAR}
+											,md_money = #{mdMoney,jdbcType=VARCHAR}
+											,md_num = #{mdNum,jdbcType=FLOAT}											
+											,mc_name = #{mcName,jdbcType=VARCHAR}
+											,mc_money = #{mcMoney,jdbcType=VARCHAR}
+											,mc_num = #{mcNum,jdbcType=FLOAT}
+											,settle_type = #{settleType,jdbcType=VARCHAR}
+											,cheque_no = #{chequeNo,jdbcType=VARCHAR}
+											,cheque_date = #{chequeDate,jdbcType=TIMESTAMP}
+											,create_date = #{createDate,jdbcType=TIMESTAMP}
+											,money = #{money,jdbcType=VARCHAR}
+											,dept_no = #{deptNo,jdbcType=VARCHAR}
+											,emp_no = #{empNo,jdbcType=VARCHAR}
+											,custo_no = #{custoNo,jdbcType=VARCHAR}
+											,apply_no = #{applyNo,jdbcType=VARCHAR}
+											,salesman_no = #{salesmanNo,jdbcType=VARCHAR}
+											,note = #{note,jdbcType=VARCHAR}
+							where id = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<update id="auditByKey" parameterType="com.dongnao.workbench.account.model.Accounting">
+		update accounting  set 
+									 check_pno = #{checkPno,jdbcType=VARCHAR}
+									,check_flag= '2'
+									where id = #{id,jdbcType=VARCHAR}
+	</update>
+</mapper>
