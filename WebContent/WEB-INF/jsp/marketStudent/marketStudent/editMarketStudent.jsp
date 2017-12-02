@@ -14,9 +14,9 @@
 				type="hidden" value="${marketStudent.time}" />
 			<table class="table">
 				<tr>
-					<td class="inputLabelTd"><span class="required">*</span>QQ号码：</td>
+					<td class="inputLabelTd">QQ号码：</td>
 					<td class="inputTd"><input id="edit_qq" name="qq" type="text" class="text" value="${marketStudent.qq}" /></td>
-					<td class="inputLabelTd"><span class="required">*</span>旺旺号：</td>
+					<td class="inputLabelTd">旺旺号：</td>
 					<td class="inputTd"> <input id="edit_subjectId" name="subjectId" type="text" class="text" value="${marketStudent.subjectId}" /></td>
 				</tr>
 				<tr>

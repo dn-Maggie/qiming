@@ -339,7 +339,7 @@
 			and follower_id like CONCAT('%',#{followerId,jdbcType=VARCHAR},'%')
 		</if>
 		<if test="followerName != null and '' != followerName">
-			and v1.follower_name like CONCAT('%',#{followerName,jdbcType=VARCHAR},'%')
+			and v1.follower_name like CONCAT('%',#{followerName,jdbcType=VARCHAR},'%') or v1.enter_emp = #{enterEmp,jdbcType=VARCHAR}
 		</if>
 		<if test="shouldPay != null and '' != shouldPay">
 			and should_pay = #{shouldPay,jdbcType=DOUBLE}

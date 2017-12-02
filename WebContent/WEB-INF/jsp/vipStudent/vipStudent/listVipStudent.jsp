@@ -333,8 +333,8 @@ jsion_sumColumns["sumColumns"] = "rn,shouldPay,actualPay,owePay";//声明页脚�
 						class="search_choose" style="width: 80px;"> <span>旺旺号:</span></li>
 					<!-- 输入框-->
 					<c:if test="${!isAdmin}">
-						<input type="hidden" name="followerName" value="${emp.nickName}"
-							id="followerName" class="search_choose" style="width: 80px;">
+						<input type="hidden" name="followerName" value="${emp.nickName}" id="followerName" >
+						<input type="hidden" name="enterEmp" value="${emp.id}" id="enterEmp" >
 					</c:if>
 					<c:if test="${isAdmin}">
 						<li style="width: 160px;"><input type="text"
